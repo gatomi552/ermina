@@ -1,10 +1,11 @@
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Text, View } from "react-native";
 import { CarouselView } from '@/components/ui';
+import "@/global.css";
 
 export default function App() {
   return (
-    <GestureHandlerRootView className="flex-1">
+    <View className="flex-1">
       <CarouselView/>
-    </GestureHandlerRootView>
+    </View>
   );
 }
