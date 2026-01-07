@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 import SwipeCard from '@/components/SwipeCard';
 import { images } from '@/lib/images';
+import '@/global.css';
+
 
 export default function Home() {
   const [index, setIndex] = useState(0);
@@ -19,14 +21,14 @@ export default function Home() {
 
   if (!images[index]) {
     return (
-      <View style={styles.center}>
+      <View className= "flex=1 justify-center items-center bg-blue">
         <Text>No hay más tarjetas</Text>
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <View className= "flex=1 justify-center items-center bg-green">
       <SwipeCard
         image={images[index].image}
         onLike={handleLike}
@@ -35,16 +37,3 @@ export default function Home() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
