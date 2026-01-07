@@ -1,8 +1,8 @@
 import { Image, StyleSheet } from 'react-native';
-import { PanGestureHandler } from 'react-native-gesture-handler';
+import { GestureDetector } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 
-import { useSwipeCard } from '../lib/useSwipeCard';
+import { useSwipeCard } from '@/lib/useSwipeCard';
 
 type SwipeCardProps = {
   image: any;
@@ -15,18 +15,18 @@ export default function SwipeCard({
   onLike,
   onDislike,
 }: SwipeCardProps) {
-  const { translateX, gestureHandler } = useSwipeCard(onLike, onDislike);
+  const { translateX, panGesture } = useSwipeCard(onLike, onDislike);
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: translateX.value }],
   }));
 
   return (
-    <PanGestureHandler onGestureEvent={gestureHandler}>
+    <GestureDetector gesture={panGesture}>
       <Animated.View style={[styles.card, animatedStyle]}>
         <Image source={image} style={styles.image} />
       </Animated.View>
-    </PanGestureHandler>
+    </GestureDetector>
   );
 }
 
