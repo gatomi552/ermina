@@ -1,38 +1,42 @@
-import { View, StyleSheet, Text } from 'react-native';
-import { useState } from 'react';
+import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
+import { useEffect, useState } from 'react';
+import { router } from 'expo-router';
 
-import SwipeCard from '@/components/SwipeCard';
-import { images } from '@/lib/images';
-import '@/global.css';
+import { getPhotos } from '@/lib/server_conection';
 
+type Photo = {
+  id: number;
+  uri: string;
+  createdAt: number;
+};
 
 export default function Home() {
-  const [index, setIndex] = useState(0);
+  const [photos, setPhotos] = useState<Photo[]>([]);
 
-  const handleLike = () => {
-    console.log('👈 BIEN');
-    setIndex((prev) => prev + 1);
+  useEffect(() => {
+    loadPhotos();
+  }, []);
+
+  const loadPhotos = async () => {
+    const data: Photo[] = await getPhotos();
+    setPhotos(data.reverse());
   };
-
-  const handleDislike = () => {
-    console.log('👉 DESCARTE');
-    setIndex((prev) => prev + 1);
-  };
-
-  if (!images[index]) {
-    return (
-      <View className= "flex=1 justify-center items-center bg-blue">
-        <Text>No hay más tarjetas</Text>
-      </View>
-    );
-  }
 
   return (
-    <View className= "flex=1 justify-center items-center bg-green">
-      <SwipeCard
-        image={images[index].image}
-        onLike={handleLike}
-        onDislike={handleDislike}
+    <View style={{ flex: 1 }}>
+      <TouchableOpacity onPress={() => router.push('/camera')}>
+        <Text style={{ padding: 20, fontSize: 18 }}>📷 Abrir cámara</Text>
+      </TouchableOpacity>
+
+      <FlatList
+        data={photos}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <Image
+            source={{ uri: item.uri }}
+            style={{ width: '100%', height: 300 }}
+          />
+        )}
       />
     </View>
   );

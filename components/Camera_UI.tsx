@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { CameraView, CameraType } from 'expo-camera';
+import { CameraView } from 'expo-camera';
 
 type Props = {
   onPhotoTaken: (uri: string) => void;
@@ -17,7 +17,12 @@ export default function CameraComponent({ onPhotoTaken }: Props) {
 
   return (
     <View style={{ flex: 1 }}>
-      <CameraView ref={cameraRef} facing={CameraType.back} style={{ flex: 1 }} />
+      <CameraView
+        ref={cameraRef}
+        facing="back"   // ✅ CORRECTO
+        style={{ flex: 1 }}
+      />
+
       <TouchableOpacity style={styles.button} onPress={takePhoto}>
         <Text style={styles.text}>📸</Text>
       </TouchableOpacity>
