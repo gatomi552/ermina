@@ -6,6 +6,10 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 ## Get started
 
+> [!IMPORTANT]
+> Leer:
+> Este es mi aplicacion en la cual se mueve de izquierda a derecha, esta no se habre en el celular por alguna cosa rara, gran parte de este mismo error le pregunte a mi profe e intente hacer lo mismo que el pero niidea de cual es error por ende no hay video de como funciona aunque oaresca que es un craseo no lo es por que ni salta error al momento de que no se habre
+
 #### Android
 
 Android previews are defined as a `workspace.onStart` hook and started as a vscode task when the workspace is opened/started.
